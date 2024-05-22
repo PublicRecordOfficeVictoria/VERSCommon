@@ -133,6 +133,17 @@ public abstract class AnalysisBase {
     }
 
     /**
+     * Return the list of errors associated with this object. Will never be
+     * null, but may be empty.
+     *
+     * @return
+     */
+    final public List<VEOFailure> getErrors() {
+        assert (infoAvailable);
+        return errors;
+    }
+
+    /**
      * Has this object any warnings associated with it?
      *
      * @return true if there are warning messages
