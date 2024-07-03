@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 import TrackTransfer.TrackTransfer;
-import java.util.logging.Level;
 
 /**
  * This class captures and prepares a summary of messages. Essentially, it
@@ -139,6 +138,8 @@ public class ResultSummary {
 
     /**
      * Record errors and warnings in a database
+     * @throws VERSCommon.AppFatal
+     * @throws VERSCommon.AppError
      */
     public void record2DB() throws AppFatal, AppError {
         if (database == null) {
@@ -272,7 +273,7 @@ public class ResultSummary {
                 sb.append("No mesg");
             }
             sb.append("} {\n");
-            if (tailsOfMessage.size() > 0) {
+            if (!tailsOfMessage.isEmpty()) {
                 for (j = 0; j < tailsOfMessage.size(); j++) {
                     for (i = 0; i < depth + 1; i++) {
                         sb.append(' ');
@@ -351,7 +352,7 @@ public class ResultSummary {
             }
 
             // no? go through list of tails
-            if (tailsOfMessage.size() > 0) {
+            if (!tailsOfMessage.isEmpty()) {
 
                 // look for one that starts with the indexCharToMatch'th character of mesg
                 for (i = 0; i < tailsOfMessage.size(); i++) {
@@ -561,7 +562,7 @@ public class ResultSummary {
 
             i = type.ordinal();
             id = ids.get(i);
-            if (id.size() > 0) {
+            if (!id.isEmpty()) {
                 w.write("  ");
                 w.write(mesg);
                 w.write(" {\r\n");
@@ -590,7 +591,7 @@ public class ResultSummary {
 
             i = type.ordinal();
             id = ids.get(i);
-            if (id.size() > 0) {
+            if (!id.isEmpty()) {
                 cmd.add("annotate");
                 cmd.add("-db");
                 cmd.add(database);
@@ -686,7 +687,7 @@ public class ResultSummary {
                 sb.append(count);
                 sb.append(")");
             }
-            if (subIds.size() > 0) {
+            if (!subIds.isEmpty()) {
                 sb.append(" in: ");
                 for (i = 0; i < subIds.size(); i++) {
                     sb.append("'");

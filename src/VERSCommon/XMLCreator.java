@@ -13,7 +13,6 @@ import java.nio.charset.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.logging.*;
 
 /**
  * This class creates a generic XML document. It is based on CreateXMLDoc in
@@ -28,8 +27,6 @@ public class XMLCreator {
     FileOutputStream fos;   // underlying file stream for file channel
     FileChannel xml;        // XML document being written
     String classname = "XMLCreator"; // String describing this class for error & logging
-
-    private final static Logger LOG = Logger.getLogger("versCommon.createXMLDoc");
 
     /**
      * Creates an XML Document in the specified directory.
@@ -95,7 +92,6 @@ public class XMLCreator {
      * @throws AppError
      */
     public void startElement(String name, String attributes, boolean runOn) throws AppError {
-        String module = "startElement";
         int i;
 
         if (!runOn) {
@@ -127,7 +123,6 @@ public class XMLCreator {
      * @throws AppError
      */
     public void includeElement(String name, String attributes, String value, boolean runOn) throws AppError {
-        String module = "includeElement";
         int i;
 
         if (!runOn) {
@@ -156,7 +151,6 @@ public class XMLCreator {
     }
 
     public void endElement(String name, boolean runOn) throws AppError {
-        String module = "endElement";
         int i;
 
         level--;

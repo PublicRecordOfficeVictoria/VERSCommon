@@ -129,7 +129,7 @@ public abstract class AnalysisBase {
      */
     public boolean hasErrors() {
         assert (infoAvailable);
-        return errors.size()>0;
+        return !errors.isEmpty();
     }
 
     /**
@@ -150,7 +150,7 @@ public abstract class AnalysisBase {
      */
     public boolean hasWarnings() {
         assert (infoAvailable);
-        return warnings.size()>0;
+        return !warnings.isEmpty();
     }
 
     /**

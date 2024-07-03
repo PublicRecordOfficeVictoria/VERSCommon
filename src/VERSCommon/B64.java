@@ -371,7 +371,7 @@ public class B64 {
 */
     
     private int si;                     // current index into sbin
-    private byte[] sbin = {0, 0, 0, 0};	// static array for decoding. Needed because
+    private final byte[] sbin = {0, 0, 0, 0};	// static array for decoding. Needed because
     // arrays passed into this method may not end
     // on 3 byte boundaries
 

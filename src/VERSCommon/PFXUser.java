@@ -31,10 +31,7 @@ public final class PFXUser {
     PublicKey pubKey;
     PrivateKey priKey;
     String pfxFile;
-
-    String userId;
     String userDesc;
-    String keyPhrase;
     private final static Logger log = Logger.getLogger("veocreate.PFXUser");
 
     /**
@@ -156,9 +153,7 @@ public final class PFXUser {
         pubKey = null;
         priKey = null;
         pfxFile = null;
-        userId = null;
         userDesc = null;
-        keyPhrase = null;
     }
     
     /**
