@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * This class contains utility routines to handle VERS Date/Times. These are
- * a restricted set of ISO 8601 time values.
+ * This class contains utility routines to handle VERS Date/Times. These are a
+ * restricted set of ISO 8601 time values.
  */
 public class VERSDate {
 
@@ -24,7 +24,8 @@ public class VERSDate {
      * Returns a date and time in the standard VERS format (see PROS 99/007
      * (Version 2), Specification 2, p146.
      *
-     * @param ms milliseconds since the epoch (if zero, return current date/time)
+     * @param ms milliseconds since the epoch (if zero, return current
+     * date/time)
      * @return The date and time as a string
      */
     public static final String versDateTime(long ms) {
@@ -44,8 +45,8 @@ public class VERSDate {
         s1 = sdf.format(d);
         return s1.substring(0, 22) + ":" + s1.substring(22, 24);
     }
-    
-        /**
+
+    /**
      * Check a date/time value against a restricted subset of ISO8601. The
      * date/time pattern is:
      * yyyy['-'mm['-'dd['T'hh[':'mm[':'ss]]('Z'|('+'|'-')hh[':'mm])]]] Note that
@@ -64,18 +65,18 @@ public class VERSDate {
             throw new IllegalArgumentException("Date/time '" + value + "' is invalid: " + dtpe.getMessage());
         }
     } 
-    */
-
+     */
     public static void testValueAsDate(String value) throws IllegalArgumentException {
         int year, month, day, hour, min;
         char tz;
+        int i;
 
         // sanity...
         if (value == null) {
             dateFailed("", 0, 0, "Date is empty");
             return;
         }
-        
+
         // check year
         if (value.length() < 4) {
             dateFailed(value, 0, 4, "Year must match 'yyyy'");
@@ -148,19 +149,28 @@ public class VERSDate {
         }
         checkNumber("Seconds", value, 17, 59);
         try {
-            tz = checkSep(value, 19, "Z+-");
+            if (value.charAt(19) == '.') {
+                i = 20;
+                while (Character.isDigit(value.charAt(i))) {
+                    i++;
+                }
+            } else {
+                i = 19;
+            }
+            tz = checkSep(value, i, "Z+-");
         } catch (IndexOutOfBoundsException e) {
             return;
         }
         if (tz == 'Z') {
             return;
         }
-        checkTimeZoneOffset(value, 20);
+        checkTimeZoneOffset(value, i+1);
     }
 
     /**
-     * private function to validate a timezone offset: hh[':'mm])].
-     * Note that timezones may range up from -12:00 to +14:00
+     * private function to validate a timezone offset: hh[':'mm])]. Note that
+     * timezones may range up from -12:00 to +14:00
+     *
      * @param value the value to check
      * @param i the index in the value where the timezone offset should start
      * @throws IllegalArgumentException if value does not contain a valid offset
@@ -177,13 +187,17 @@ public class VERSDate {
     }
 
     /**
-     * private function to check that a character is a valid separator in this position.
+     * private function to check that a character is a valid separator in this
+     * position.
+     *
      * @param value the value to check
      * @param i the index in the value to check for the separator
      * @param sep a string containing the valid separators for this position
      * @return the separator actually found
-     * @throws IllegalArgumentException if the character at the index position is not a valid separator
-     * @throws IndexOutOfBoundsException if the index position is beyond the end of the value
+     * @throws IllegalArgumentException if the character at the index position
+     * is not a valid separator
+     * @throws IndexOutOfBoundsException if the index position is beyond the end
+     * of the value
      */
     private static char checkSep(String value, int i, String sep)
             throws IllegalArgumentException, IndexOutOfBoundsException {
@@ -199,6 +213,7 @@ public class VERSDate {
 
     /**
      * private method to check a two digit number.
+     *
      * @param item the specific item being checked for (e.g. 'Months')
      * @param value the value being checked
      * @param i the index in the value of the first digit of the number
@@ -227,13 +242,13 @@ public class VERSDate {
 
     /**
      * Throw an IllegalArgumentException because the date is incorrect.
+     *
      * @param value The value being checked
      * @param i The index where the error was found
      * @param len The length of the element being looked for
      * @param err String describing the error
-     * @throws IllegalArgumentException 
+     * @throws IllegalArgumentException
      */
-
     private static void dateFailed(String value, int i, int len, String err) throws IllegalArgumentException {
         int ei;
 
