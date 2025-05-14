@@ -39,7 +39,10 @@
 <!--    without it                                                          -->
 <!--                                                                        -->
 <!-- Summary of changes from Version 2.0.4 (2023-10-19):                    -->
-<!--  * Added vers:contextPath to vers:FileMetadata                         -->
+<!--  * Added vers:ContextPath to vers:FileMetadata                         -->
+<!--                                                                        -->
+<!-- Summary of changes from Version 2.0.5 (2025-05-14):                    -->
+<!--  * Added versterms:contextPath to vers:FileMetadata as belt and braces -->
 
 <!--  BASIC VEO STRUCTURE                                                   -->
 
@@ -154,8 +157,9 @@
 
 <!-- modified in version 2.0 -->
 <!ELEMENT vers:RecordMetadata (
-	naa:Agent+, naa:RightsManagement, naa:Title, vers:Subject*,
-	naa:Description*, vers:AuxiliaryDescription*,
+	naa:Agent+, naa:RightsManagement, naa:Title, verterms:contextPath*,
+	vers:CanUseFor*, vers:UseFor*,
+	vers:Subject*, naa:Description*, vers:AuxiliaryDescription*,
 	naa:Language*, naa:Relation*, naa:Coverage*,
 	naa:Function*, naa:Date, naa:Type?, naa:AggregationLevel,
 	naa:Format?, naa:RecordIdentifier?, naa:ManagementHistory,
@@ -264,7 +268,8 @@
 <!ATTLIST vers:AuthorizingOfficer scheme CDATA #IMPLIED>
 
 <!ELEMENT vers:FileMetadata (
-	naa:Agent+, naa:RightsManagement, naa:Title, vers:ContextPath*, vers:Subject*,
+	naa:Agent+, naa:RightsManagement, naa:Title,
+	vers:ContextPath*, verterms:contextPath*, vers:Subject*,
 	naa:Description*, vers:AuxiliaryDescription*, naa:Language*,
 	naa:Relation*, naa:Coverage*, naa:Function*, vers:Date, naa:Type?,
 	naa:AggregationLevel, naa:Format?, naa:RecordIdentifier?,
@@ -277,6 +282,13 @@
 	vers:ContextPathValue)>
 <!ELEMENT vers:ContextPathDomain (#PCDATA)>
 <!ELEMENT vers:ContextPathValue (#PCDATA)>
+
+<!-- added in version 2.0.5 -->
+<!ELEMENT versterms:contextPath (
+	verterms:contextPathDomain,
+	verterms:contextPathValue)>
+<!ELEMENT versterms:contextPathDomain (#PCDATA)>
+<!ELEMENT verterms:contextPathValue (#PCDATA)>
 
 <!ELEMENT vers:Date (
 	naa:DateTimeCreated, naa:DateTimeTransacted,
