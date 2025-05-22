@@ -5,7 +5,7 @@
  */
 package VERSCommon;
 
-import TrackTransfer.CmdAnnotate;
+// import TrackTransfer.CmdAnnotate;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
-import TrackTransfer.TrackTransfer;
+// import TrackTransfer.TrackTransfer;
 
 /**
  * This class captures and prepares a summary of messages. Essentially, it
@@ -607,14 +607,14 @@ public class ResultSummary {
                 for (j = 0; j < id.size(); j++) {
                     cmd.add(id.get(j).toString());
                 }
-                TrackTransfer tt = new TrackTransfer(null);
+                // TrackTransfer tt = new TrackTransfer(null);
                 s = (String[]) cmd.toArray();
                 System.out.print("==>");
                 for (j=0; j<s.length; j++) {
                     System.out.print(" '"+s[j]+"'");
                 }
                 System.out.println("");
-                tt.doCommand(s);
+                // tt.doCommand(s);
             }
         }
 
